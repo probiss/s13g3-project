@@ -56,7 +56,7 @@ server.use(getLog);
 
 //3- Routing örneği
 server.get("/", (req,res)=> {
-    res.status(200).json({statusCode: 200, message: "Hey, server is up and running..."});
+    res.status(200).json({statusCode: 200,  message: req.MESSAGE || "Hey, server is up and running..."});
 } )
 
 /*
