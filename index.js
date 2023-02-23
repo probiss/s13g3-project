@@ -43,7 +43,7 @@ function getLog(req,res, next) {
     next();
 }
 function isAuthUser(req,res,next) {
-    if(isAuthenticated){
+    if(authenticatedUsers.includes(req.ip)){
         next();
     } else {
         //res.status(403).send("<h1>Giremezsin!!! Önce Login olmanız lazım</h1>");
@@ -64,11 +64,13 @@ server.get("/", (req,res)=> {
   /auth       querysting parola=fsweb1122 ise bu kişi biriş yapabilir.
   /hobbits    auth ile doğru parola ile giriş yaptı ise hobbitleri geri dönsün. yoksa ekranda hata mesajı versin.
 */
-let isAuthenticated = false;
+
+let authenticatedUsers = [];
 server.get("/auth", (req,res)=>{
         const parola = req.query.parola;
         console.log("Parola: " + parola)
         if (parola === 'fsweb1122'){
+            authenticatedUsers.push(req.ip);
             console.log("Hoş geldin!..")
             res.status(200).send("<h1>Hoş geldiniz</h1>");
             isAuthenticated = true;
