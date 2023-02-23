@@ -25,7 +25,7 @@
 //2- Server setup
 const express = require('express');
 const server = express();
-
+require('dotenv').config();
 const path = require('path');
 server.use(express.json());
 
@@ -106,6 +106,7 @@ server.use((err,req,res,next)=>{
 
 
 //2- Server setup
-server.listen(9000, ()=>{
-    console.log("listening on port 9000")
+const PORT = process.env.PORT || 9000;
+server.listen(PORT, ()=>{
+    console.log(`listening on port ${PORT}`)
 })
